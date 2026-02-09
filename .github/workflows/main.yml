@@ -39,7 +39,7 @@ jobs:
         # Check if test file exists, run if it does
         if [ -f tests/test_data.py ]; then
           echo "Running tests..."
-          coverage run -m pytest test/data.py -v
+          coverage run -m pytest test_data.py -v
           coverage report -m
           coverage xml
         else
