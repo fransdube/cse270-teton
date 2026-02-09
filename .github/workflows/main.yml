@@ -78,6 +78,12 @@ jobs:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     
+    # ADD THESE PERMISSIONS:
+    permissions:
+      id-token: write
+      pages: write
+      contents: read
+    
     steps:
     - uses: actions/checkout@v4
     
