@@ -39,11 +39,11 @@ jobs:
         # Check if test file exists, run if it does
         if [ -f tests/test_data.py ]; then
           echo "Running tests..."
-          coverage run -m pytest tests/data.py -v
+          coverage run -m pytest test/data.py -v
           coverage report -m
           coverage xml
         else
-          echo "No test file found at tests/data.py"
+          echo "No test file found at test_data.py"
           echo "Creating dummy coverage.xml for workflow..."
           echo '<?xml version="1.0" ?><coverage></coverage>' > coverage.xml
         fi
