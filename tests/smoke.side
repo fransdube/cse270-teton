@@ -1,0 +1,92 @@
+{
+  "id": "smoke-test-teton",
+  "version": "2.0",
+  "name": "Smoke Test",
+  "url": "http://127.0.0.1:5500",
+  "tests": [
+    {
+      "id": "home-elements",
+      "name": "1. Home Page - Basic Elements",
+      "commands": [
+        { "command": "open", "target": "/teton/1.6/index.html", "value": "" },
+        { "command": "verifyElementPresent", "target": "css=.header-logo img", "value": "" },
+        { "command": "verifyText", "target": "css=.header-title h1", "value": "Teton Idaho" },
+        { "command": "verifyText", "target": "css=.header-title h2", "value": "Chamber of Commerce" },
+        { "command": "verifyTitle", "target": "Teton Idaho CoC", "value": "" }
+      ]
+    },
+    {
+      "id": "home-nav",
+      "name": "2. Home Page - Spotlights and Navigation",
+      "commands": [
+        { "command": "open", "target": "/teton/1.6/index.html", "value": "" },
+        { "command": "setWindowSize", "target": "1400x1000", "value": "" },
+        { "command": "waitForElementPresent", "target": "css=.spotlight1", "value": "5000" },
+        { "command": "verifyElementPresent", "target": "css=.spotlight1", "value": "" },
+        { "command": "verifyElementPresent", "target": "css=.spotlight2", "value": "" },
+        { "command": "verifyElementPresent", "target": "linkText=Join Us", "value": "" },
+        { "command": "click", "target": "linkText=Join Us", "value": "" },
+        { "command": "verifyElementPresent", "target": "css=.join-wizard-main", "value": "" }
+      ]
+    },
+    {
+      "id": "directory-view",
+      "name": "3. Directory - Grid and List Views",
+      "commands": [
+        { "command": "open", "target": "/teton/1.6/directory.html", "value": "" },
+        { "command": "click", "target": "id=directory-grid", "value": "" },
+        { "command": "waitForElementPresent", "target": "css=#directory-data p", "value": "5000" },
+        { "command": "verifyElementPresent", "target": "xpath=//p[contains(.,'Teton Turf and Tree')]", "value": "" },
+        { "command": "click", "target": "id=directory-list", "value": "" },
+        { "command": "waitForElementPresent", "target": "xpath=//p[contains(.,'Teton Turf and Tree')]", "value": "5000" },
+        { "command": "verifyElementPresent", "target": "xpath=//p[contains(.,'Teton Turf and Tree')]", "value": "" }
+      ]
+    },
+    {
+      "id": "join-wizard",
+      "name": "4. Join - Form Wizard Navigation",
+      "commands": [
+        { "command": "open", "target": "/teton/1.6/join.html", "value": "" },
+        { "command": "verifyElementPresent", "target": "name=fname", "value": "" },
+        { "command": "click", "target": "name=fname", "value": "" },
+        { "command": "type", "target": "name=fname", "value": "John" },
+        { "command": "click", "target": "name=lname", "value": "" },
+        { "command": "type", "target": "name=lname", "value": "Doe" },
+        { "command": "click", "target": "name=bizname", "value": "" },
+        { "command": "type", "target": "name=bizname", "value": "Smoke Test Inc" },
+        { "command": "click", "target": "name=biztitle", "value": "" },
+        { "command": "type", "target": "name=biztitle", "value": "Tester" },
+        { "command": "click", "target": "name=submit", "value": "" },
+        { "command": "waitForElementPresent", "target": "name=email", "value": "5000" },
+        { "command": "verifyElementPresent", "target": "name=email", "value": "" }
+      ]
+    },
+    {
+      "id": "admin-login",
+      "name": "5. Admin - Login Failure Error",
+      "commands": [
+        { "command": "open", "target": "/teton/1.6/admin.html", "value": "" },
+        { "command": "verifyElementPresent", "target": "id=username", "value": "" },
+        { "command": "click", "target": "id=username", "value": "" },
+        { "command": "type", "target": "id=username", "value": "admin-fail" },
+        { "command": "click", "target": "id=password", "value": "" },
+        { "command": "type", "target": "id=password", "value": "pass123" },
+        { "command": "click", "target": "css=.mysubmit", "value": "" },
+        { "command": "waitForText", "target": "css=.errorMessage", "value": "Invalid username and password." },
+        { "command": "verifyText", "target": "css=.errorMessage", "value": "Invalid username and password." }
+      ]
+    }
+  ],
+  "suites": [
+    {
+      "id": "main-suite",
+      "name": "Smoke Test Suite",
+      "persistSession": false,
+      "parallel": false,
+      "timeout": 300,
+      "tests": ["home-elements", "home-nav", "directory-view", "join-wizard", "admin-login"]
+    }
+  ],
+  "urls": ["http://127.0.0.1:5500"],
+  "plugins": []
+}
